@@ -4,26 +4,23 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Lootly.Areas.Api.Models;
+using Lootly.Data.Models;
+using Lootly.Data.Services;
 
 namespace Lootly.Areas.Api.Controllers
 {
     public class BooksController : ApiController
     {
-		  Book[] books = new Book[] 
-		  { 
-				new Book{Id=1, Name="The Wheel of Time"},
-				new Book{Id=2, Name="The Game of Thrones"}
-		  };
+		  BookService service = new BookService(System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
 
 		  public IEnumerable<Book> GetAllBooks()
 		  {
-				return books;
+				return service.GetBooks();
 		  }
 
 		  public IHttpActionResult GetBook(int id)
 		  {
-				var book = books.FirstOrDefault((b) => b.Id == id);
+				var book = service.GetBook(id);
 				if (book == null)
 				{
 					 return NotFound();
