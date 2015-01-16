@@ -11,7 +11,7 @@ namespace Lootly.Areas.Api.Controllers
 {
     public class BooksController : ApiController
     {
-		  BookService service = new BookService(System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+		  BookService service = new BookService("DefaultConnection");
 
 		  public IEnumerable<Book> GetAllBooks()
 		  {
