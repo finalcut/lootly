@@ -1,7 +1,42 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lootly";
 }
 
-<h2>Index</h2>
+<h2>Tracking Your Loot!</h2>
+<div>
+	 <h3>All Books</h3>
+	 <ul id="books" />
+</div>
 
+
+<script>
+    var uri = 'api/books';
+
+    $(document).ready(function () {
+      // Send an AJAX request
+      $.getJSON(uri)
+          .done(function (data) {
+            // On success, 'data' contains a list of products.
+            $.each(data, function (key, item) {
+              // Add a list item for the product.
+              $('<li>', { text: formatItem(item) }).appendTo($('#books'));
+            });
+          });
+    });
+
+    function formatItem(item) {
+      return item.name;
+    }
+
+    function find() {
+      var id = $('#bookId').val();
+      $.getJSON(uri + '/' + id)
+          .done(function (data) {
+            $('#book').text(formatItem(data));
+          })
+          .fail(function (jqXHR, textStatus, err) {
+            $('#book').text('Error: ' + err);
+          });
+    }
+  </script>

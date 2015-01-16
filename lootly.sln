@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lootly", "lootly\lootly.csproj", "{548E1914-AD1E-4392-A279-739CC6B954A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lootly", "lootly\Lootly.csproj", "{548E1914-AD1E-4392-A279-739CC6B954A4}"
 EndProject
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "lootly.Azure", "lootly.Azure\lootly.Azure.ccproj", "{D3F450E6-D8C6-43EB-8D61-1DA52C807B84}"
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "lootly.Azure", "lootly.Azure\Lootly.Azure.ccproj", "{D3F450E6-D8C6-43EB-8D61-1DA52C807B84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
