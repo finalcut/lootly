@@ -9,23 +9,17 @@ using Lootly.Data.Services;
 
 namespace Lootly.Areas.Api.Controllers
 {
-    public class BooksController : ApiController
+    public class BooksController : BaseApiController<BookService, Book, Book, Book>
     {
-		  BookService service = new BookService("DefaultConnection");
 
-		  public IEnumerable<Book> GetAllBooks()
+		  public override IEnumerable<Book> GetAll()
 		  {
-				return service.GetBooks();
+				return base.GetAll();
 		  }
 
-		  public IHttpActionResult GetBook(int id)
+		  public override IHttpActionResult Get(int id)
 		  {
-				var book = service.GetBook(id);
-				if (book == null)
-				{
-					 return NotFound();
-				}
-				return Ok(book);
+				return base.Get(id);
 		  }
     }
 }
