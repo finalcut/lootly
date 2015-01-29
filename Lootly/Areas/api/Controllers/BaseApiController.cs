@@ -16,8 +16,8 @@ namespace Lootly.Areas.Api.Controllers
 		  public CustomDatabase Database { get; set; }
 	 }
 
-	 public abstract class BaseApiController<TService, TGetModel, TCreateModel, TUpdateModel> : BaseApiController
-		  where TService : IService<TGetModel, TCreateModel, TUpdateModel>
+	 public abstract class BaseApiController<TService, TModel> : BaseApiController
+		  where TService : IService<TModel>
 	 {
 		  public TService Service { get; set; }
 		  //public UserService UserService { get; set; }
@@ -32,12 +32,12 @@ namespace Lootly.Areas.Api.Controllers
 				return Ok(obj);
 		  }
 
-		  public virtual IEnumerable<TGetModel> GetAll()
+		  public virtual IEnumerable<TModel> GetAll()
 		  {
 				return Service.GetAll();
 		  }
 
-		  public virtual HttpResponseMessage Post(TCreateModel newItem, string routeName)
+		  public virtual HttpResponseMessage Post(TModel newItem, string routeName)
 		  {
 				var id = Service.Create(newItem);
 				var response = Request.CreateResponse(HttpStatusCode.Created, Service.Get(id));
@@ -46,15 +46,15 @@ namespace Lootly.Areas.Api.Controllers
 				return response;
 		  }
 
-		  public virtual TGetModel Put(object id, JObject data)
+		  public virtual TModel Put(object id, JObject data)
 		  {
 				// https://github.com/schotime/NPoco/wiki/Change-Tracking-for-Updates
 				throw new NotImplementedException();
 		  }
 
-		  public virtual TGetModel Patch(object id, JObject data)
+		  public virtual TModel Patch(object id, JObject data)
 		  {
-				var poco = data.ToObject<TUpdateModel>();
+				var poco = data.ToObject<TModel>();
 				var propertyNames = data.Properties().Select(p => p.Name);
 				Service.Update(id, poco, propertyNames);
 				return Service.Get(id);
@@ -74,11 +74,11 @@ namespace Lootly.Areas.Api.Controllers
 		   */
 	 }
 
-	 public abstract class BaseApiController<TService, TGetModel, TCreateModel, TUpdateModel, TFilterModel> : BaseApiController<TService, TGetModel, TCreateModel, TUpdateModel>
-		  where TService : IService<TGetModel, TCreateModel, TUpdateModel, TFilterModel>
+	 public abstract class BaseApiController<TService, TModel, TFilterModel> : BaseApiController<TService, TModel>
+		  where TService : IService<TModel, TFilterModel>
 		  where TFilterModel : class, new()
 	 {
-		  public virtual IEnumerable<TGetModel> Get([FromUri]TFilterModel filter)
+		  public virtual IEnumerable<TModel> Get([FromUri]TFilterModel filter)
 		  {
 				return Service.GetAll(filter ?? new TFilterModel());
 		  }

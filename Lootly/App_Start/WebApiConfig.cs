@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Lootly.Data;
@@ -40,7 +37,7 @@ namespace Lootly
 
 				SetupAutofac(config);
 
-				config.Services.Replace(typeof(IHttpControllerSelector), new SDammann.WebApi.Versioning.RouteVersionedControllerSelector(config));
+				config.Services.Replace(typeof(IHttpControllerSelector), new RouteVersionedControllerSelector(config));
 		  }
 
 		  private static void SetupAutofac(HttpConfiguration config)

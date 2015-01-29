@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lootly.Data.Services
 {
@@ -12,38 +10,38 @@ namespace Lootly.Data.Services
 		  public CustomDatabase Database { get; set; }
 	 }
 
-	 public abstract class BaseService<TGetModel, TCreateModel, TUpdateModel>
-		  : BaseService, IService<TGetModel, TCreateModel, TUpdateModel>
+	 public abstract class BaseService<TModel>
+		  : BaseService, IService<TModel>
 	 {
-		  public TGetModel Get(object id)
+		  public TModel Get(object id)
 		  {
-				return Database.SingleOrDefaultById<TGetModel>(id);
+				return Database.SingleOrDefaultById<TModel>(id);
 		  }
 
-		  public TGetModel GetWhere( Expression<Func<TGetModel, bool>> expression)
+		  public TModel GetWhere(Expression<Func<TModel, bool>> expression)
 		  {
-				return Database.Query<TGetModel>().SingleOrDefault(expression);
+				return Database.Query<TModel>().SingleOrDefault(expression);
 		  }
 
-		  public IEnumerable<TGetModel> GetAll()
+		  public IEnumerable<TModel> GetAll()
 		  {
-				return Database.Fetch<TGetModel>();
+				return Database.Fetch<TModel>();
 		  }
 
-		  public IEnumerable<TGetModel> GetAllWhere( Expression<Func<TGetModel, bool>> expression)
+		  public IEnumerable<TModel> GetAllWhere(Expression<Func<TModel, bool>> expression)
 		  {
 				return Database.FetchWhere(expression);
 		  }
 
-		  public int Create( TCreateModel poco)
+		  public int Create(TModel poco)
 		  {
 				var obj = Database.Insert(poco);
 				return Convert.ToInt32(obj);
 		  }
 
-		  public int Update( object id, TUpdateModel poco, IEnumerable<string> propertyNames)
+		  public int Update(object id, TModel poco, IEnumerable<string> propertyNames)
 		  {
-				var pocoData = Database.PocoDataFactory.ForType(typeof(TUpdateModel));
+				var pocoData = Database.PocoDataFactory.ForType(typeof(TModel));
 
 				var columnNames = pocoData.Columns
 						  .Select(kvp => kvp.Value)
@@ -56,14 +54,14 @@ namespace Lootly.Data.Services
 
 		  public int Delete( object id)
 		  {
-				return Database.Delete<TCreateModel>(id);
+				return Database.Delete<TModel>(id);
 		  }
 	 }
 
-	 public abstract class BaseRepository<TGetModel, TCreateModel, TUpdateModel, TFilterModel>
-		  : BaseService<TGetModel, TCreateModel, TUpdateModel>, IService<TGetModel, TCreateModel, TUpdateModel, TFilterModel>
+	 public abstract class BaseRepository<TModel, TFilterModel>
+		  : BaseService<TModel>, IService<TModel, TFilterModel>
 		  where TFilterModel : class, new()
 	 {
-		  public abstract IEnumerable<TGetModel> GetAll(TFilterModel filter);
+		  public abstract IEnumerable<TModel> GetAll(TFilterModel filter);
 	 }
 }

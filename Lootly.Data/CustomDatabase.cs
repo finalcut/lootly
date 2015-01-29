@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
 using NPoco;
 using Lootly.Data.Helpers;
 
