@@ -22,9 +22,9 @@ namespace Lootly.Areas.Api.Controllers
 		  public TService Service { get; set; }
 		  //public UserService UserService { get; set; }
 
-		  public virtual IHttpActionResult Get(int version, int id)
+		  public virtual IHttpActionResult Get(int id)
 		  {
-				var obj= Service.Get(version, id);
+				var obj= Service.Get(id);
 				if (obj == null)
 				{
 					 return NotFound();
@@ -32,15 +32,15 @@ namespace Lootly.Areas.Api.Controllers
 				return Ok(obj);
 		  }
 
-		  public virtual IEnumerable<TGetModel> GetAll(int version)
+		  public virtual IEnumerable<TGetModel> GetAll()
 		  {
-				return Service.GetAll(version);
+				return Service.GetAll();
 		  }
 
-		  public virtual HttpResponseMessage Post(int version, TCreateModel newItem, string routeName)
+		  public virtual HttpResponseMessage Post(TCreateModel newItem, string routeName)
 		  {
-				var id = Service.Create(version, newItem);
-				var response = Request.CreateResponse(HttpStatusCode.Created, Service.Get(version, id));
+				var id = Service.Create(newItem);
+				var response = Request.CreateResponse(HttpStatusCode.Created, Service.Get(id));
 				var uri = Url.Link(routeName, new { id });
 				response.Headers.Location = new Uri(uri);
 				return response;
@@ -52,17 +52,17 @@ namespace Lootly.Areas.Api.Controllers
 				throw new NotImplementedException();
 		  }
 
-		  public virtual TGetModel Patch(int version, object id, JObject data)
+		  public virtual TGetModel Patch(object id, JObject data)
 		  {
 				var poco = data.ToObject<TUpdateModel>();
 				var propertyNames = data.Properties().Select(p => p.Name);
-				Service.Update(version, id, poco, propertyNames);
-				return Service.Get(version, id);
+				Service.Update(id, poco, propertyNames);
+				return Service.Get(id);
 		  }
 
-		  public virtual int Delete(int version, object id)
+		  public virtual int Delete(object id)
 		  {
-				return Service.Delete(version, id);
+				return Service.Delete(id);
 		  }
 		  /*
 		  protected User CurrentUser()
@@ -78,9 +78,9 @@ namespace Lootly.Areas.Api.Controllers
 		  where TService : IService<TGetModel, TCreateModel, TUpdateModel, TFilterModel>
 		  where TFilterModel : class, new()
 	 {
-		  public virtual IEnumerable<TGetModel> Get(int version, [FromUri]TFilterModel filter)
+		  public virtual IEnumerable<TGetModel> Get([FromUri]TFilterModel filter)
 		  {
-				return Service.GetAll(version, filter ?? new TFilterModel());
+				return Service.GetAll(filter ?? new TFilterModel());
 		  }
 	 }
 }

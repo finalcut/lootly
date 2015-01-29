@@ -4,11 +4,11 @@ namespace Lootly.Data.Services
 {
 	 public interface IService<TGetModel, TCreateModel, TUpdateModel>
 	 {
-		  TGetModel Get(int version, object id);
-		  IEnumerable<TGetModel> GetAll(int version);
-		  int Create(int version, TCreateModel poco);
-		  int Update(int version, object id, TUpdateModel poco, IEnumerable<string> propertyNames);
-		  int Delete(int version, object id);
+		  TGetModel Get(object id);
+		  IEnumerable<TGetModel> GetAll();
+		  int Create(TCreateModel poco);
+		  int Update(object id, TUpdateModel poco, IEnumerable<string> propertyNames);
+		  int Delete(object id);
 		  CustomDatabase Database { get; set; }
 	 }
 
@@ -16,6 +16,6 @@ namespace Lootly.Data.Services
 		  : IService<TGetModel, TCreateModel, TUpdateModel>
 		  where TFilterModel : class, new()
 	 {
-		  IEnumerable<TGetModel> GetAll(int version, TFilterModel filter);
+		  IEnumerable<TGetModel> GetAll(TFilterModel filter);
 	 }
 }

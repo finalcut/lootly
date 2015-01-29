@@ -12,14 +12,14 @@ namespace Lootly.Areas.Api.Controllers
 	 public class BaseBooksController : BaseApiController<BookService, Book, Book, Book>
     {
 
-		  public override IEnumerable<Book> GetAll(int version)
+		  public override IEnumerable<Book> GetAll()
 		  {
-				return base.GetAll(version);
+				return base.GetAll();
 		  }
 
-		  public override IHttpActionResult Get(int version, int id)
+		  public override IHttpActionResult Get(int id)
 		  {
-				return base.Get(version, id);
+				return base.Get(id);
 		  }
     }
 }
