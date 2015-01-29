@@ -80,6 +80,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NPoco.2.6.88\lib\net40\NPoco.dll</HintPath>
     </Reference>
+    <Reference Include="SDammann.WebApi.Versioning">
+      <HintPath>..\packages\SDammann.WebApi.Versioning.2.7.0.0\lib\net45\SDammann.WebApi.Versioning.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -180,7 +183,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\api\apiAreaRegistration.cs" />
     <Compile Include="Areas\api\Controllers\BaseApiController.cs" />
-    <Compile Include="Areas\api\Controllers\BooksController.cs" />
+    <Compile Include="Areas\api\Controllers\BaseBooksController.cs" />
+    <Compile Include="Areas\api\Controllers\Version1\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

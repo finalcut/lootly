@@ -80,7 +80,10 @@ namespace Lootly.Data
 				}
 				else
 				{
-					 return Inflector.MakePlural(t.Name);
+					 string tableName = Inflector.MakePlural(t.Name);
+
+					 return tableName;
+
 				}
 		  }
 

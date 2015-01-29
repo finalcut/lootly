@@ -10,6 +10,8 @@ using Newtonsoft.Json.Serialization;
 using NPoco;
 using System.Net.Http.Formatting;
 using System.Reflection;
+using System.Web.Http.Dispatcher;
+using SDammann.WebApi.Versioning;
 
 namespace Lootly
 {
@@ -24,7 +26,7 @@ namespace Lootly
 
 				config.Routes.MapHttpRoute(
 					 name: "DefaultApi",
-					 routeTemplate: "api/{controller}/{id}",
+					 routeTemplate: "api/v{version}/{controller}/{id}",
 					 defaults: new { id = RouteParameter.Optional }
 				);
 
@@ -37,6 +39,8 @@ namespace Lootly
 				formatter.Indent = true;
 
 				SetupAutofac(config);
+
+				config.Services.Replace(typeof(IHttpControllerSelector), new SDammann.WebApi.Versioning.RouteVersionedControllerSelector(config));
 		  }
 
 		  private static void SetupAutofac(HttpConfiguration config)

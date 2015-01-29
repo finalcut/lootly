@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lootly.Data.Models
+namespace Lootly.Data.Models.V1
 {
 	 public class Book
 	 {

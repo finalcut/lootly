@@ -15,33 +15,33 @@ namespace Lootly.Data.Services
 	 public abstract class BaseService<TGetModel, TCreateModel, TUpdateModel>
 		  : BaseService, IService<TGetModel, TCreateModel, TUpdateModel>
 	 {
-		  public TGetModel Get(object id)
+		  public TGetModel Get(int version, object id)
 		  {
 				return Database.SingleOrDefaultById<TGetModel>(id);
 		  }
 
-		  public TGetModel GetWhere(Expression<Func<TGetModel, bool>> expression)
+		  public TGetModel GetWhere(int version, Expression<Func<TGetModel, bool>> expression)
 		  {
 				return Database.Query<TGetModel>().SingleOrDefault(expression);
 		  }
 
-		  public IEnumerable<TGetModel> GetAll()
+		  public IEnumerable<TGetModel> GetAll(int version)
 		  {
 				return Database.Fetch<TGetModel>();
 		  }
 
-		  public IEnumerable<TGetModel> GetAllWhere(Expression<Func<TGetModel, bool>> expression)
+		  public IEnumerable<TGetModel> GetAllWhere(int version, Expression<Func<TGetModel, bool>> expression)
 		  {
 				return Database.FetchWhere(expression);
 		  }
 
-		  public int Create(TCreateModel poco)
+		  public int Create(int version, TCreateModel poco)
 		  {
 				var obj = Database.Insert(poco);
 				return Convert.ToInt32(obj);
 		  }
 
-		  public int Update(object id, TUpdateModel poco, IEnumerable<string> propertyNames)
+		  public int Update(int version, object id, TUpdateModel poco, IEnumerable<string> propertyNames)
 		  {
 				var pocoData = Database.PocoDataFactory.ForType(typeof(TUpdateModel));
 
@@ -54,7 +54,7 @@ namespace Lootly.Data.Services
 				return Database.Update(poco, id, columnNames);
 		  }
 
-		  public int Delete(object id)
+		  public int Delete(int version, object id)
 		  {
 				return Database.Delete<TCreateModel>(id);
 		  }
@@ -64,6 +64,6 @@ namespace Lootly.Data.Services
 		  : BaseService<TGetModel, TCreateModel, TUpdateModel>, IService<TGetModel, TCreateModel, TUpdateModel, TFilterModel>
 		  where TFilterModel : class, new()
 	 {
-		  public abstract IEnumerable<TGetModel> GetAll(TFilterModel filter);
+		  public abstract IEnumerable<TGetModel> GetAll(int version, TFilterModel filter);
 	 }
 }
