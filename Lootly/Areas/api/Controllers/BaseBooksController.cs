@@ -12,10 +12,5 @@ namespace Lootly.Areas.Api.Controllers
 		  {
 				return base.GetAll();
 		  }
-
-		  public override IHttpActionResult Get(int id)
-		  {
-				return base.Get(id);
-		  }
     }
 }

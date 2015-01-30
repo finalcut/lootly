@@ -8,7 +8,7 @@ namespace Lootly.Areas.Api
         {
             get 
             {
-                return "api";
+                return "Api";
             }
         }
 

@@ -155,7 +155,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Areas\api\Views\web.config" />
+    <Content Include="Areas\Api\Views\web.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -184,10 +184,10 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\api\apiAreaRegistration.cs" />
-    <Compile Include="Areas\api\Controllers\BaseApiController.cs" />
-    <Compile Include="Areas\api\Controllers\BaseBooksController.cs" />
-    <Compile Include="Areas\api\Controllers\Version1\BooksController.cs" />
+    <Compile Include="Areas\Api\apiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\BaseApiController.cs" />
+    <Compile Include="Areas\Api\Controllers\BaseBooksController.cs" />
+    <Compile Include="Areas\Api\Controllers\Version1\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -209,8 +209,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\api\Models\" />
-    <Folder Include="Areas\api\Views\Shared\" />
+    <Folder Include="Areas\Api\Models\" />
+    <Folder Include="Areas\Api\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
